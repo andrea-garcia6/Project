@@ -1,0 +1,37 @@
+import arcpy
+import pandas as pd
+import numpy as np
+arcpy.env.workspace = r"C:\Users\andre\Desktop\USM\Semester 3\LAST\Week 7\Project\Week7_SPA"
+table = 'Tornados_Since_1970_MS'
+fields = ['month', 'Month_new']
+arcpy.AddField_management(table, 'Month_new',field_type = "TEXT")
+
+# monthdic[1] evaluates as January
+monthdic = {1:"January", 2:"February", 3:"March", 4:"April", 5:"May", 6:"June", 7:"July", 8:"August", 9:"September", 10:"October", 11:"November", 12:"December"}
+
+#Write code to get monthtext
+cursor = arcpy.da.UpdateCursor(table, fields)
+for row in cursor:
+    if row[0] in monthdic:
+        row[1] = monthdic[row[0]]
+        cursor.updateRow(row)
+
+del cursor
+
+
+    
+#graph
+import arcpy
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plot
+
+
+df = pd.read_csv('Alabama.csv', usecols= ['month','FREQUENCY'])
+df.plot.bar(x="month", y="FREQUENCY", title="Number of Tornadoes per month in Alabama", fontsize=14, color=['deepskyblue']);
+plot.title("Number of Tornadoes per month in Alabama")
+plot.xticks(rotation=30, horizontalalignment="center")
+plot.xlabel("Months")
+plot.ylabel("Number of tornadoes")
+plot.show()
+
