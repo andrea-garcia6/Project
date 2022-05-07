@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Feb 16 15:31:26 2022
+
+@author: andre
+"""
+
+import pandas as pd
+import numpy as np
+import random 
+import colorama
+from colorama import Fore, Back, Style
+
+Ex1 = "Exercise 1: Rename John to Barbara in my_first_series and change value of Jack from 55 to -10"
+print(Ex1)
+my_dict = {'John': 10, 'Annet': 12, 'Robert': 5, 'Jack': 55, 'Susan': None, 'Joshua': 0}
+my_first_series = pd.Series(my_dict)
+rename = my_first_series.rename(index={'John': 'Barbara'})
+print(Fore.RED + Back.BLACK + "Replacing John for Barbara: ")
+format(rename['Jack'])
+rename['Jack'] = -10
+print(Fore.RED + Back.BLACK + "And Jack's new value from 55 to: {}".format(rename['Jack']))
+print(rename)
+
+print(" ")
+
+Ex2 = "Exercise 2: Positive values and new series"
+print(Ex2)
+
+posvalues = my_first_series[(my_first_series > 0)]
+print(Fore.GREEN + "Show me ONLY the positive numbers: ")
+print(posvalues)
+print(" ")
+print(Fore.YELLOW +"Lets add Ashly and Lukas now...")
+new_list = my_first_series['Ashlyn'] = None
+new_list = my_first_series.append(pd.Series({'Lukas': -5}))
+print(new_list)
+print(" ")
+
+#Multiply the series
+print(Fore.CYAN + "Now let's multiply the lists")
+seriestotal = my_first_series + new_list
+print(Fore.CYAN + "It's just multiplying the integers")
+print(seriestotal)
+#savetocsv
+new_list.to_csv(r'C:\Users\andre\Desktop\USM\Semester 3\LAST\Week 5\newlist.csv')
