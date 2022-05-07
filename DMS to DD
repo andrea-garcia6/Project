@@ -1,0 +1,44 @@
+import re
+import pandas as pd
+import csv
+
+#conversion function
+def dms2dd(degrees, minutes, seconds, direction):
+    dd = float(degrees) + float(minutes)/60 + float(seconds)/(60*60);
+    if direction == 'S' or direction == 'W':
+        dd *= -1
+    return dd;
+
+def dd2dms(deg):
+    d = int(deg)
+    md = abs(deg - d) * 60
+    m = int(md)
+    sd = (md - m) * 60
+    return [d, m, sd]
+
+def parse_dms(dms):
+    parts = (re.split('[^\d\w]+', dms))
+    lat = dms2dd(parts[0], parts[1], parts[2], parts[3])
+    lng = dms2dd(parts[4], parts[5], parts[6], parts[7])
+    return (lat, lng)
+
+#coordinates
+dd1 = parse_dms("30°06.499' N 87°47.964' W")
+dd2 = parse_dms("30°06.493' N 87°47.965' W")
+dd3 = parse_dms("30°06.497' N 87°47.965' W")
+dd4 = parse_dms("30°06.324' N 87°48.231' W")
+dd5 = parse_dms("30°06.368' N 87°48.187' W")
+dd6 = parse_dms("30°06.423' N 87°48.141' W")
+dd7 = parse_dms("30°06.128' N 87°48.550' W")
+dd8 = parse_dms("30°06.137' N 87°48.688' W")
+dd9 = parse_dms("30°06.127' N 87°48.529' W")
+dd10 = parse_dms("30°06.201' N 87°48.826' W")
+dd11 = parse_dms("30°06.157' N 87°48.822' W")
+print(dd1,dd2,dd2,dd3,dd4,dd5,dd6,dd7,dd8,dd9,dd10,dd11)
+
+lat = [30.238611111111112, 30.236944444444447, 30.236944444444447, 30.238055555555558, 30.19, 30.202222222222225, 30.2175, 30.135555555555555, 30.138055555555557, 30.13527777777778, 30.155833333333334, 30.143611111111113]
+long = [-88.05111111111111, -88.05138888888888, -88.05138888888888, -88.05138888888888, -87.86416666666666, -87.85194444444444, -87.83916666666667, -87.95277777777777, -87.99111111111111, -87.94694444444444, -88.02944444444444, -88.02833333333334]
+
+dict = {"Latitude":lat, "Longitude":long}
+df = pd.DataFrame(dict)
+df.to_csv(r'C:\Users\andre\Desktop\Project\Coresfinal.csv') 
