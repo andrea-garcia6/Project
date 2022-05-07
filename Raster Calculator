@@ -1,0 +1,9 @@
+import arcpy
+from arcpy import env
+from arcpy.ia import *
+env.workspace = r"C:\Users\andre\Desktop\Project"
+raster1 = r"C:\Users\andre\Desktop\Project\Alabama_mask"
+rastertransform =  arcpy.gp.RasterCalculator_sa(raster1*1000000, "alabama_mas2")
+
+outInt = Int("alabama_mas2")
+outInt.save(r"C:\Users\andre\Desktop\Project\Int_alabama_3")
