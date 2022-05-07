@@ -1,0 +1,16 @@
+import arcpy
+
+#local variables
+arcpy.env.workspace = r'C:\Users\andre\Desktop\Project'
+tbl = r'C:\Users\andre\Desktop\Project\corelocations.csv'
+out_fc = "Coresfinal"
+x_coords = "Longitude"
+y_coords = "Latitude"
+coord = arcpy.SpatialReference(4326)
+
+arcpy.management.XYTableToPoint(
+     in_table=tbl,
+     out_feature_class=out_fc,
+     x_field=x_coords,
+     y_field=y_coords,
+     coordinate_system=coord)
