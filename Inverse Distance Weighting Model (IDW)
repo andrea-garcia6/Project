@@ -1,0 +1,18 @@
+from arcpy import env
+from arcpy.sa import *
+
+# Set environment settings
+env.workspace = r'C:\Users\andre\Desktop\Project'
+# Set the extent environment using a keyword
+arcpy.env.extent = "Alabama_mask"
+# Set local variables
+inPointFeatures = "Coresfinal.shp"
+zField = "Depth_m_"
+outRaster = "IDW_extent"
+cellSize = 4.13333200001489E-05
+power = 3
+searchRadius = 12
+
+# Execute IDW
+arcpy.Idw_3d(inPointFeatures, zField, outRaster, cellSize, 
+             power, searchRadius)
